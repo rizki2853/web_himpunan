@@ -23,6 +23,7 @@ class UserFactory extends Factory
             'nim' => $this->faker->unique()->safeEmail(),
             'divisi_id' => mt_rand(1, 5),
             'email_verified_at' => now(),
+            'masa_jabatan' => '2019-2020',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
             'foto' => $this->faker->imageUrl(640, 480, 'person', true),

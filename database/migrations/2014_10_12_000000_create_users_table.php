@@ -20,7 +20,9 @@ return new class extends Migration
             $table->string('nim')->unique();
             $table->string('foto');
             $table->string('jabatan');
-            $table->integer('status');
+            $table->boolean('status')->default(true);
+            $table->string('masa_jabatan');
+            $table->string('ig')->nullable();
             $table->boolean('isAdmin')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

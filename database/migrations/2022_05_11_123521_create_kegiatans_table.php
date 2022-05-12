@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('namaKegiatan');
             $table->text('excerpt');
             $table->text('keterangan');
+            $table->timestamp('tanggal_kegiatan');
             $table->timestamps();
         });
     }
