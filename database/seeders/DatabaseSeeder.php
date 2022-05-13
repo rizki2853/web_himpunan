@@ -19,10 +19,28 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::factory(10)->create();
-
-        Divisi::factory(5)->create();
         Kegiatan::factory(15)->create();
         Gallery::factory(20)->create();
+
+        Divisi::create([
+            'divisi_name' => 'INTI'
+        ]);
+
+        Divisi::create([
+            'divisi_name' => 'pemda'
+        ]);
+
+        Divisi::create([
+            'divisi_name' => 'advokasi'
+        ]);
+
+        Divisi::create([
+            'divisi_name' => 'organisasi'
+        ]);
+
+        Divisi::create([
+            'divisi_name' => 'kesekretariatan'
+        ]);
 
         User::create([
             'name' => 'Giri Restu Aji',

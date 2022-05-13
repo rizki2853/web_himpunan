@@ -36,6 +36,6 @@
   
   @yield('body')
 
-  <script src="script.js"></script>
+  <script src="{{ url('script.js') }}"></script>
 </body>
 </html>

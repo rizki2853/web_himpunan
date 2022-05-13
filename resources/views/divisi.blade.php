@@ -1,38 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/x-icon" href="assets/logo_hmif.svg">
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-  <title>Beranda - HMIF Unram</title>
-</head>
-<body>
-  <header class="container">
-    <div id="nav-left">
-      <img class="logo" src="assets/logo_hmif.svg" alt="">
-      <!-- Mobile Hamburger -->
-      <button class="hamburger" id="hamburger">
-        <i class="fas fa-bars" id="fa-bars"></i>
-      </button>
-      <button class="close-hamburger" id="close-hamburger">
-        <i class="fas fa-times" id="fa-bars"></i>
-      </button>
-    </div>
-    <nav class="nav-list" id="nav-list">
-      <ul>
-        <li><a href="home.html">Beranda</a></li>
-        <li><a href="divisi.html" class="active">Divisi</a></li>
-        <li><a href="kalender.html">Kalender</a></li>
-        <li><a href="kotaksaran.html">Kotak Saran</a></li>
-      </ul>
-      <button>
-        Login
-      </button>
-    </nav>
-  </header>
+@extends('layout/main_layout')
+@section('body')
+
   <section class="hero-section container">
     <div class="hero-background">
       <video autoplay="" loop="" class="hero__background-video hero__background-video--light">
@@ -60,10 +28,9 @@
   <span class="anchor" id="divisi"></span>
   <div class="anchor" id="divisi-pemda"></div>
   <section class="filter-division container">
-    <button class="btn-pill active" id="btn-pemda" onclick="changeDivisionFilter('pemda')">PEMDA</button>
-    <button class="btn-pill" id="btn-advo" onclick="changeDivisionFilter('advo')">ADVOKASI</button>
-    <button class="btn-pill" id="btn-organ" onclick="changeDivisionFilter('organ')">ORGANISASI</button>
-    <button class="btn-pill" id="btn-kesek" onclick="changeDivisionFilter('kesek')">KESEKRETARIATAN</button>
+    @foreach($divisis as $divisi)
+      <button class="btn-pill {{ ($divisi->divisi_name === 'pemda') ? 'active' : '' }}" id="btn-{{ $divisi->divisi_name }}" onclick="changeDivisionFilter('{{ $divisi->divisi_name }}')">{{ $divisi->divisi_name }}</button>
+    @endforeach
   </section>
 
   <!-- Pemda -->
@@ -184,7 +151,7 @@
   </div>
 
   <!-- ADVO -->
-  <div class="hide" id="advo">
+  <div class="hide" id="advokasi">
     <section class="divisi container" id="divisi-advo">
       <div class="divisi-left">
         <img src="assets/advo.png" alt="Divisi Advokasi 2022">
@@ -296,7 +263,7 @@
   </div>
 
   <!-- ORGAN -->
-  <div class="hide" id="organ">
+  <div class="hide" id="organisasi">
     <section class="divisi container" id="divisi-organ">
       <div class="divisi-left">
         <img src="assets/organ.png" alt="Divisi Organisasi 2022">
@@ -413,7 +380,7 @@
   </div>
 
   <!-- KESEK -->
-  <div class="hide" id="kesek">
+  <div class="hide" id="kesekretariatan">
     <section class="divisi container" id="divisi-kesek">
       <div class="divisi-left">
         <img src="assets/kesek.png" alt="Divisi Kesekretariatan 2022">
@@ -523,6 +490,4 @@
       </div>
     </section>
   </div>
-  <script src="script.js"></script>
-</body>
-</html>
+@endsection

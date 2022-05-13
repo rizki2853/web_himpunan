@@ -7,6 +7,9 @@ const modal = document.getElementById("login-modal");
 const loginBtn = document.getElementById("button-login");
 const closeModal = document.getElementsByClassName("close")[0];
 const body = document.getElementsByTagName("BODY")[0];
+var isMobile =
+	Math.min(window.screen.width, window.screen.height) < 768 ||
+	navigator.userAgent.indexOf("Mobi") > -1;
 
 window.addEventListener("scroll", function () {
 	scrollPosition = window.scrollY;
@@ -32,14 +35,14 @@ close_hamburger.addEventListener("click", () => {
 
 function changeDivisionFilter(division) {
 	const btnPemda = document.getElementById("btn-pemda");
-	const btnOrgan = document.getElementById("btn-organ");
-	const btnAdvo = document.getElementById("btn-advo");
-	const btnKesek = document.getElementById("btn-kesek");
+	const btnOrgan = document.getElementById("btn-organisasi");
+	const btnAdvo = document.getElementById("btn-advokasi");
+	const btnKesek = document.getElementById("btn-kesekretariatan");
 
 	const pemda = document.getElementById("pemda");
-	const organ = document.getElementById("organ");
-	const advo = document.getElementById("advo");
-	const kesek = document.getElementById("kesek");
+	const organ = document.getElementById("organisasi");
+	const advo = document.getElementById("advokasi");
+	const kesek = document.getElementById("kesekretariatan");
 
 	kesek.classList.add("hide");
 	pemda.classList.add("hide");
@@ -222,3 +225,93 @@ btnNext.addEventListener("click", () => {
 		btnNext.classList.add("hide");
 	}
 });
+
+
+let btnBackDocumentation = document.querySelector("#btn-back-documentation");
+let btnNextDocumentaition = document.querySelector("#btn-next-documentation");
+let documentationIndex = 0;
+const documentaionList = document.querySelectorAll(
+	".documentation-wrapper .documentation-card"
+);
+const documentationCard = document.querySelector(
+	".documentation-card"
+);
+if (documentationIndex === 0) {
+	btnBackDocumentation.classList.add("hide");
+}
+if(!isMobile){
+	let currentDocumentation = 3;
+	btnBackDocumentation.addEventListener("click", () => {
+		documentationCard.style.animationName = "slideBefore";
+		if (documentationIndex > 0) {
+			documentaionList[documentationIndex - 1].classList.remove("hide");
+			documentaionList[documentationIndex + 2].classList.add("hide");
+			documentaionList[documentationIndex - 1].style.animationName = "slideBefore";
+			documentationIndex--;
+			currentDocumentation--;
+		}
+		if (currentDocumentation <= documentaionList.length - 1) {
+			btnNextDocumentaition.classList.remove("hide");
+		}
+		if (documentationIndex === 0) {
+			btnBackDocumentation.classList.add("hide");
+		}
+	});
+	btnNextDocumentaition.addEventListener("click", () => {
+
+		if (currentDocumentation <= documentaionList.length - 1) {
+			documentaionList[currentDocumentation].classList.remove("hide");
+			documentaionList[documentationIndex].classList.add("hide");
+			documentaionList[currentDocumentation].style.animationName =
+				"slideNext";
+
+			documentationIndex++;
+			currentDocumentation++;
+		}
+		if (documentationIndex > 0) {
+			btnBackDocumentation.classList.remove("hide");
+		}
+		if (currentDocumentation > documentaionList.length - 1) {
+			btnNextDocumentaition.classList.add("hide");
+		}
+	});
+}else{
+	documentaionList[1].classList.add("hide");
+	documentaionList[2].classList.add("hide");
+	let currentDocumentation = 1;
+	btnBackDocumentation.addEventListener("click", () => {
+		if (documentationIndex > 0) {
+			documentaionList[documentationIndex - 1].classList.remove("hide");
+			documentaionList[documentationIndex - 1].style.animationName =
+				"slideBefore";
+
+			documentaionList[documentationIndex].classList.add("hide");
+			documentaionList[documentationIndex].classList.add("hide");
+			documentationIndex--;
+			currentDocumentation--;
+		}
+		if (currentDocumentation <= documentaionList.length - 1) {
+			btnNextDocumentaition.classList.remove("hide");
+		}
+		if (documentationIndex === 0) {
+			btnBackDocumentation.classList.add("hide");
+		}
+	});
+	btnNextDocumentaition.addEventListener("click", () => {
+		if (currentDocumentation <= documentaionList.length - 1) {
+			documentaionList[currentDocumentation].classList.remove("hide");
+			documentaionList[currentDocumentation].style.animationName = "slideNext";
+
+			documentaionList[documentationIndex].classList.add("hide");
+			documentationIndex++;
+			currentDocumentation++;
+		}
+		if (documentationIndex > 0) {
+			btnBackDocumentation.classList.remove("hide");
+		}
+		if (currentDocumentation > documentaionList.length - 1) {
+			btnNextDocumentaition.classList.add("hide");
+		}
+	});
+
+}
